@@ -4,7 +4,10 @@
 
 <div id="transactions">
   <% @transactions.each do |transaction| %>
-    <%= render transaction %>
+    <%= transaction['id'] %>
+    <%= transaction['creditAccount'] %>
+    <%= transaction['debitAccount'] %>
+    <%= transaction['amount'] %>
     <p>
       <%= link_to "Show this transaction", transaction %>
     </p>
