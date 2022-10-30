@@ -19,12 +19,12 @@ RSpec.describe Transaction, type: :model do
 
   it 'is not created with invalid credit_account as a lengthy (>= 16) string' do
     expect(Transaction.new(credit_account: 'c123456789123456789', debit_account: 'd123456',
-                           amount: nil)).to_not be_valid
+                           amount: 50)).to_not be_valid
   end
 
   it 'is not created with invalid debit_account as a lengthy (>= 16) string' do
     expect(Transaction.new(credit_account: 'c123456', debit_account: 'd123456789123456789',
-                           amount: nil)).to_not be_valid
+                           amount: 50)).to_not be_valid
   end
 
   it 'is created with valid attributes' do
