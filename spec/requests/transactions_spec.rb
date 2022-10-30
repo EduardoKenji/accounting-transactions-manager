@@ -109,12 +109,12 @@ RSpec.describe "Transactions", type: :request do
 
       it "will not create a new transaction due to lengthy debit_account (> 15 chars)" do
         invalid_attributes = { credit_account: 'c123456', debit_account: 'd123456789123456789', amount: 100 }
-        expect { post '/transactions', params: invalid_attributes, as: :json }.to_not change(Transaction, :count)
+        expect { post transactions_path, params: invalid_attributes, as: :json }.to_not change(Transaction, :count)
       end
 
       it "will not create a new transaction due to lengthy credit_account (> 15 chars)" do
         invalid_attributes = { credit_account: 'c123456789123456789', debit_account: 'd123456', amount: 100 }
-        expect { post '/transactions', params: invalid_attributes, as: :json }.to_not change(Transaction, :count)
+        expect { post transactions_path, params: invalid_attributes, as: :json }.to_not change(Transaction, :count)
       end
     end
   end
