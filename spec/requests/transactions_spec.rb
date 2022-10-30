@@ -102,6 +102,11 @@ RSpec.describe "Transactions", type: :request do
         expect { post transactions_path, params: invalid_attributes, as: :json }.to_not change(Transaction, :count)
       end
 
+      it "will not create a new transaction due to amount being 0" do
+        invalid_attributes = { credit_account: 'c123456', debit_account: 'd123456', amount: 0 }
+        expect { post transactions_path, params: invalid_attributes, as: :json }.to_not change(Transaction, :count)
+      end
+
       it "will not create a new transaction due to missing debit_account" do
         invalid_attributes = { credit_account: 'c123456', amount: 100 }
         expect { post transactions_path, params: invalid_attributes, as: :json }.to_not change(Transaction, :count)
