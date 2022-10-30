@@ -15,7 +15,6 @@ Minimalist accounting software made in Ruby on Rails that exposes a GraphQL API
    - `transaction(id: 1)`: fetches the transaction with the specified id.
    - `transactionsByCreditAccount(debitAccount: "a_credit_account")`: fetches all transactions from the specified credit account.
    - `transactionsByDebitAccount(debitAccount: "a_debit_account")`: fetches all transactions from the specified debit account.   
-   - `transactionsByDebitAccount(debitAccount: "a_debit_account")`: 
 * Mutations available in GraphQL(locally accessible with the URL `http://localhost:3000/graphiql`):
    - `createTransaction(input: {...})`: allows the user to insert a new transaction by providing the `creditAccount`, `debitAccount` and `amount` parameters.
       - Input:    
