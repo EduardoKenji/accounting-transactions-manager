@@ -6,6 +6,7 @@ class TransactionsController < ApplicationController
     @transactions = Transaction.all
   end
 
+  # GET /debit-account/balance
   def balance_by_debit_account
     @debit_account = nil
     return unless Transaction.debit_account(params[:debit_account]).any?
@@ -14,6 +15,7 @@ class TransactionsController < ApplicationController
     @balance = Transaction.debit_account(params[:debit_account]).balance
   end
 
+  # GET /credit-account/balance
   def balance_by_credit_account
     @credit_account = nil
     return unless Transaction.credit_account(params[:credit_account]).any?
@@ -44,12 +46,10 @@ class TransactionsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_transaction
     @transaction = Transaction.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def transaction_params
     params.require(:transaction).permit(:credit_account, :debit_account, :amount)
   end

@@ -70,3 +70,7 @@ gem "graphiql-rails", group: :development
 gem "rspec", "~> 3.12"
 
 gem "rspec-rails", "~> 6.0"
+
+gem "factory_bot_rails", "~> 6.2"
+
+gem "rails-controller-testing", "~> 1.0"
