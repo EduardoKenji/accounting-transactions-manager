@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Balance by credit account</h1>
+
+<% if @credit_account == nil %>
+<div class="normal-text">Invalid credit account provided or there are no transactions with this credit account.</div>
+<% else %>
+  <table>
+    <tr>
+      <th>Credit Account</th>
+      <th>Balance</th>
+    </tr>  
+    <tr>
+      <th><%= @credit_account %></th>
+      <th><%= @balance %></th>
+    </tr> 
+  </table>
+<% end %>
+
+<div class="link"><%= link_to "Back to search balance by credit account", credit_account_search_path %></div>
+<div class="link"><%= link_to "Back to all transactions", transactions_path %></div>
+

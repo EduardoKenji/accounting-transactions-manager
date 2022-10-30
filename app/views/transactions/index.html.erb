@@ -3,15 +3,22 @@
 <h1>Transactions</h1>
 
 <div id="transactions">
-  <% @transactions.each do |transaction| %>
-    <%= transaction['id'] %>
-    <%= transaction['creditAccount'] %>
-    <%= transaction['debitAccount'] %>
-    <%= transaction['amount'] %>
-    <p>
-      <%= link_to "Show this transaction", transaction %>
-    </p>
-  <% end %>
+  <table>
+    <tr>
+      <th>Credit Account</th>
+      <th>Debit Account</th>
+      <th>Amount</th>
+    </tr>  
+      <% @transactions.each do |transaction| %>
+        <tr> 
+          <th><%= transaction['credit_account'] %></th>
+          <th><%= transaction['debit_account'] %></th>
+          <th><%= transaction['amount'] %></th>
+        </tr>
+      <% end %>
+  </table>
 </div>
 
-<%= link_to "New transaction", new_transaction_path %>
+<div class="link"><%= link_to "New transaction", new_transaction_path %></div>
+<div class="link"><%= link_to "Search balance by credit account", credit_account_search_path %></div>
+<div class="link"><%= link_to "Search balance by debit account", debit_account_search_path %></div>

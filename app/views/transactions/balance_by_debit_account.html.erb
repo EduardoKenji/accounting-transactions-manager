@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Balance by debit account</h1>
+
+<% if @debit_account == nil %>
+<div class="normal-text">Invalid debit account provided or there are no transactions with this debit account.</div>
+<% else %>
+  <table>
+    <tr>
+      <th>Debit Account</th>
+      <th>Balance</th>
+    </tr>  
+    <tr>
+      <th><%= @debit_account %></th>
+      <th><%= @balance %></th>
+    </tr> 
+  </table>
+<% end %>
+
+<div class="link"><%= link_to "Back to search balance by debit account", debit_account_search_path %></div>
+<div class="link"><%= link_to "Back to all transactions", transactions_path %></div>
+

@@ -1,22 +1,31 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: %i[show edit update destroy]
+  before_action :set_transaction, only: %i[show]
 
   # GET /transactions or /transactions.json
   def index
-    query_string = "
-    {
-      transactions {
-        id
-        debitAccount
-        creditAccount
-        amount
-        createdAt
-        updatedAt
-      }
-    }
-    "
-    result_hash = AccountingTransactionsManagerSchema.execute(query_string)
-    @transactions = result_hash['data']['transactions']
+    @transactions = Transaction.all
+  end
+
+  def search_debit_account; end
+
+  def search_credit_account; end
+
+  def balance_by_debit_account
+    @debit_account = nil
+    return unless Transaction.where('debit_account = ?', params[:debit_account]).any?
+
+    @debit_account = params[:debit_account]
+    @balance = Transaction.where('debit_account = ?', params[:debit_account])
+                          .sum(:amount)
+  end
+
+  def balance_by_credit_account
+    @credit_account = nil
+    return unless Transaction.where('credit_account = ?', params[:credit_account]).any?
+
+    @credit_account = params[:credit_account]
+    @balance = Transaction.where('credit_account = ?', params[:credit_account])
+                          .sum(:amount)
   end
 
   # GET /transactions/1 or /transactions/1.json
@@ -26,9 +35,6 @@ class TransactionsController < ApplicationController
   def new
     @transaction = Transaction.new
   end
-
-  # GET /transactions/1/edit
-  def edit; end
 
   # POST /transactions or /transactions.json
   def create
@@ -42,29 +48,6 @@ class TransactionsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # PATCH/PUT /transactions/1 or /transactions/1.json
-  def update
-    respond_to do |format|
-      if @transaction.update(transaction_params)
-        format.html { redirect_to transaction_url(@transaction), notice: 'Transaction was successfully updated.' }
-        format.json { render :show, status: :ok, location: @transaction }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /transactions/1 or /transactions/1.json
-  def destroy
-    @transaction.destroy
-
-    respond_to do |format|
-      format.html { redirect_to transactions_url, notice: 'Transaction was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
