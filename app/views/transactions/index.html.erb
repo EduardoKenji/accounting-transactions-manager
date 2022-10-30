@@ -8,12 +8,14 @@
       <th>Credit Account</th>
       <th>Debit Account</th>
       <th>Amount</th>
+      <th>Date</th>
     </tr>  
       <% @transactions.each do |transaction| %>
         <tr> 
           <th><%= transaction['credit_account'] %></th>
           <th><%= transaction['debit_account'] %></th>
           <th><%= transaction['amount'] %></th>
+          <th><%= transaction['created_at'] %></th>
         </tr>
       <% end %>
   </table>

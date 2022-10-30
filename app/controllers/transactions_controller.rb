@@ -6,30 +6,21 @@ class TransactionsController < ApplicationController
     @transactions = Transaction.all
   end
 
-  def search_debit_account; end
-
-  def search_credit_account; end
-
   def balance_by_debit_account
     @debit_account = nil
-    return unless Transaction.where('debit_account = ?', params[:debit_account]).any?
+    return unless Transaction.debit_account(params[:debit_account]).any?
 
     @debit_account = params[:debit_account]
-    @balance = Transaction.where('debit_account = ?', params[:debit_account])
-                          .sum(:amount)
+    @balance = Transaction.debit_account(params[:debit_account]).balance
   end
 
   def balance_by_credit_account
     @credit_account = nil
-    return unless Transaction.where('credit_account = ?', params[:credit_account]).any?
+    return unless Transaction.credit_account(params[:credit_account]).any?
 
     @credit_account = params[:credit_account]
-    @balance = Transaction.where('credit_account = ?', params[:credit_account])
-                          .sum(:amount)
+    @balance = Transaction.credit_account(params[:credit_account]).balance
   end
-
-  # GET /transactions/1 or /transactions/1.json
-  def show; end
 
   # GET /transactions/new
   def new
