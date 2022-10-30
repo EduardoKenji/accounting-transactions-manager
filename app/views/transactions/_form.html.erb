@@ -12,18 +12,18 @@
   <% end %>
 
   <div>
-    <%= form.label :credit_account, style: "display: block" %>
-    <%= form.text_field :credit_account %>
+    <%= form.label "#{:credit_account} (max 15 chars)", style: "display: block" %>
+    <%= form.text_field :credit_account, :maxlength => 15 %>
   </div>
 
   <div>
-    <%= form.label :debit_account, style: "display: block" %>
-    <%= form.text_field :debit_account %>
+    <%= form.label "#{:debit_account} (max 15 chars)", style: "display: block" %>
+    <%= form.text_field :debit_account, :maxlength => 15 %>
   </div>
 
   <div>
     <%= form.label :amount, style: "display: block" %>
-    <%= form.number_field :amount %>
+    <%= form.number_field :amount, :min => -(2**31), :max => (2**31-1) %>
   </div>
 
   <div class="button">
