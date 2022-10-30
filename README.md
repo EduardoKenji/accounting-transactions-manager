@@ -7,13 +7,14 @@ Minimalist accounting software made in Ruby on Rails that exposes a GraphQL API
   
 * Database details
   - PostgreSQL
-  - It may be needed to add `host: localhost` and `port: 5432` if the application is going to access a database in the local machine.
+  - The parameters `host: localhost` and `port: 5432` may be needed inside the `config/database.yml` for localhost databases.
+  - The parameters `username` and `password` may also need to be changed to work accordingly with the user's PostgreSQL role.
 
 * Queries available in GraphQL (locally accessible with the URL `http://localhost:3000/graphiql`):
    - `transactions`: fetches all transactions
    - `transaction(id: 1)`: fetches the transaction with the specified id.
    - `transactionsByCreditAccount(debitAccount: "a_credit_account")`: fetches all transactions from the specified credit account.
-   - `transactionsByDebitAccount(debitAccount: "a_debit_account")`: fetches all transactions from the specified account.   
+   - `transactionsByDebitAccount(debitAccount: "a_debit_account")`: fetches all transactions from the specified debit account.   
 
 * Application details:
   - The user can:
