@@ -2,7 +2,7 @@
 
 <%= form_with url: account_balance_path, method: :get do |form| %>
   <%= form.label :account, "Account:" %>
-  <%= form.text_field :account %>
+  <%= form.text_field :account, :maxlength => 15 %>
   <%= form.submit "Search" %>
 <% end %>
 
