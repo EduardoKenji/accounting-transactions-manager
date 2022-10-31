@@ -5,15 +5,15 @@
 <div id="transactions">
   <table>
     <tr>
-      <th>Credit Account</th>
       <th>Debit Account</th>
+      <th>Credit Account</th>
       <th>Amount</th>
       <th>Date</th>
     </tr>  
       <% @transactions.each do |transaction| %>
         <tr> 
-          <th><%= transaction['credit_account'] %></th>
           <th><%= transaction['debit_account'] %></th>
+          <th><%= transaction['credit_account'] %></th>
           <th><%= transaction['amount'] %></th>
           <th><%= transaction['created_at'] %></th>
         </tr>
@@ -22,5 +22,4 @@
 </div>
 
 <div class="link"><%= link_to "New transaction", new_transaction_path %></div>
-<div class="link"><%= link_to "Search balance by credit account", credit_account_search_path %></div>
-<div class="link"><%= link_to "Search balance by debit account", debit_account_search_path %></div>
+<div class="link"><%= link_to "Search balance by account", account_search_path %></div>

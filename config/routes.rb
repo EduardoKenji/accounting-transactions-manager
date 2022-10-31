@@ -3,11 +3,8 @@ Rails.application.routes.draw do
   post '/graphql', to: 'graphql#execute'
   resources :transactions
 
-  get '/debit-account/search', to: 'transactions#search_debit_account'
-  get '/debit-account/balance', to: 'transactions#balance_by_debit_account'
-
-  get '/credit-account/search', to: 'transactions#search_credit_account'
-  get '/credit-account/balance', to: 'transactions#balance_by_credit_account'
+  get '/account/search', to: 'transactions#search_account'
+  get '/account/balance', to: 'transactions#balance_by_account'
 
   root 'transactions#index'
 end

@@ -1,9 +1,0 @@
-<h1>Search balance by debit account</h1>
-
-<%= form_with url: debit_account_balance_path, method: :get do |form| %>
-  <%= form.label :debit_account, "Debit account:" %>
-  <%= form.text_field :debit_account %>
-  <%= form.submit "Search" %>
-<% end %>
-
-<div class="link"><%= link_to "Back to transactions", transactions_path %></div>

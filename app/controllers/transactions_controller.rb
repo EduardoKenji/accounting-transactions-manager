@@ -6,22 +6,13 @@ class TransactionsController < ApplicationController
     @transactions = Transaction.all
   end
 
-  # GET /debit-account/balance
-  def balance_by_debit_account
-    @debit_account = nil
-    return unless Transaction.debit_account(params[:debit_account]).any?
+  # GET /account/balance
+  def balance_by_account
+    @account = nil
+    return unless Transaction.credit_account(params[:account]).any? || Transaction.debit_account(params[:account]).any?
 
-    @debit_account = params[:debit_account]
-    @balance = Transaction.debit_account(params[:debit_account]).balance
-  end
-
-  # GET /credit-account/balance
-  def balance_by_credit_account
-    @credit_account = nil
-    return unless Transaction.credit_account(params[:credit_account]).any?
-
-    @credit_account = params[:credit_account]
-    @balance = Transaction.credit_account(params[:credit_account]).balance
+    @account = params[:account]
+    @balance = Transaction.credit_account(params[:account]).balance - Transaction.debit_account(params[:account]).balance
   end
 
   # GET /transactions/new

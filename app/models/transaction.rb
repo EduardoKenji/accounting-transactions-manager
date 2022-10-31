@@ -1,5 +1,5 @@
 class Transaction < ApplicationRecord
-  validates :amount, presence: true, numericality: { only_integer: true, other_than: 0 }
+  validates :amount, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :debit_account, presence: true, length: { maximum: 15 }
   validates :credit_account, presence: true, length: { maximum: 15 }
 

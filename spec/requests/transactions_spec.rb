@@ -21,63 +21,41 @@ RSpec.describe "Transactions", type: :request do
     end
   end
 
-  describe "GET /credit-account/search" do
-    context "allow balance search by credit account" do
+  describe "GET /account/search" do
+    context "allow balance search by account" do
       it "renders the search form" do
-        get credit_account_search_path
-        expect(response).to render_template(:search_credit_account)
+        get account_search_path
+        expect(response).to render_template(:search_account)
       end
     end
   end
 
-  describe "GET /debit-account/search" do
-    context "allow balance search by debit account" do
-      it "renders the search form" do
-        get debit_account_search_path
-        expect(response).to render_template(:search_debit_account)
-      end
-    end
-  end
-
-  describe "GET /credit-account/balance" do
-    context "shows balance for the credit account with valid transactions" do
+  describe "GET /account/balance" do
+    context "shows balance for the account with valid transactions" do
       let(:valid_transaction) { FactoryBot.create(:transaction) }
       let(:valid_transaction_2) { FactoryBot.create(:transaction) }
-      it "renders the table with the balance for the credit account" do
+      
+      it "renders the table with the balance for the credited account" do
         valid_transaction
         valid_transaction_2
-        get credit_account_balance_path, params: { credit_account: valid_transaction['credit_account'] }
-        expect(response).to render_template(:balance_by_credit_account)
-        expect(assigns(:balance)).to eql(valid_transaction['amount']+valid_transaction_2['amount'])
+        get account_balance_path, params: { account: valid_transaction['credit_account'] }
+        expect(response).to render_template(:balance_by_account)
+        expect(assigns(:balance)).to eql(200)
       end
-    end
 
-    context "shows balance for the credit account without transactions" do
-      it "renders the table with the balance for the credit account" do
-        get credit_account_balance_path, params: { credit_account: 'c123456' }
-        expect(response).to render_template(:balance_by_credit_account)
-        expect(assigns(:balance)).to be_nil
-      end
-    end
-  end
-
-  describe "GET /debit-account/balance" do
-    context "shows balance for the debit account with valid transactions" do
-      let(:valid_transaction) { FactoryBot.create(:transaction) }
-      let(:valid_transaction_2) { FactoryBot.create(:transaction) }
-      it "renders the table with the balance for the debit account" do
+      it "renders the table with the balance for the debited account" do
         valid_transaction
         valid_transaction_2
-        get debit_account_balance_path, params: { debit_account: valid_transaction['debit_account']}
-        expect(response).to render_template(:balance_by_debit_account)
-        expect(assigns(:balance)).to eql(valid_transaction['amount']+valid_transaction_2['amount'])
+        get account_balance_path, params: { account: valid_transaction['debit_account'] }
+        expect(response).to render_template(:balance_by_account)
+        expect(assigns(:balance)).to eql(-200)
       end
     end
 
-    context "shows balance for the debit account without transactions" do
-      it "renders the table with the balance for the debit account" do
-        get debit_account_balance_path, params: { debit_account: 'd123456' }
-        expect(response).to render_template(:balance_by_debit_account)
+    context "shows balance for the account without transactions" do
+      it "will not find a balance for the inputed credit account" do
+        get account_balance_path, params: { credit_account: 'c123456' }
+        expect(response).to render_template(:balance_by_account)
         expect(assigns(:balance)).to be_nil
       end
     end
@@ -104,6 +82,11 @@ RSpec.describe "Transactions", type: :request do
 
       it "will not create a new transaction due to amount being 0" do
         invalid_attributes = { credit_account: 'c123456', debit_account: 'd123456', amount: 0 }
+        expect { post transactions_path, params: invalid_attributes, as: :json }.to_not change(Transaction, :count)
+      end
+
+      it "will not create a new transaction due to amount being negative" do
+        invalid_attributes = { credit_account: 'c123456', debit_account: 'd123456', amount: -100 }
         expect { post transactions_path, params: invalid_attributes, as: :json }.to_not change(Transaction, :count)
       end
 

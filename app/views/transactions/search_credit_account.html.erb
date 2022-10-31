@@ -1,9 +1,0 @@
-<h1>Search balance by credit account</h1>
-
-<%= form_with url: credit_account_balance_path, method: :get do |form| %>
-  <%= form.label :credit_account, "Credit account:" %>
-  <%= form.text_field :credit_account %>
-  <%= form.submit "Search" %>
-<% end %>
-
-<div class="link"><%= link_to "Back to transactions", transactions_path %></div>
