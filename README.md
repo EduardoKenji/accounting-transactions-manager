@@ -27,8 +27,19 @@ Minimalist accounting software made in Ruby on Rails that exposes a GraphQL API
 * Application details:
   - The user can:
     - Check all transactions(including their attributes such as `credit_account`, `debit_account`, `date` and `amount`.
+    
+      ![image](https://user-images.githubusercontent.com/11583245/198911491-729c5a0d-0081-474d-8c40-d7137320a624.png)
+
     - Create a new transaction
+    
+      ![image](https://user-images.githubusercontent.com/11583245/198911598-a83126b1-6ca1-4340-a671-87b47184c9d4.png)
+      ![image](https://user-images.githubusercontent.com/11583245/198911636-cff884ec-35a2-4d1f-8418-8ceb8db724d6.png)
+    
     - Search the balance by the `debit_account` or `credit_account`
+    
+      ![image](https://user-images.githubusercontent.com/11583245/198911715-d1fd6ee2-5c2f-40e7-a77c-22a09e4b6b76.png)
+      ![image](https://user-images.githubusercontent.com/11583245/198911728-bfb4d0e7-4b9c-4729-8631-aebcb663e180.png)
+
   - Setup the application with the commands:
   ```
   bundle install
@@ -47,6 +58,3 @@ Minimalist accounting software made in Ruby on Rails that exposes a GraphQL API
   http://localhost:3000
   http://localhost:3000/transactions/
   ```
-  - The application's entry point(root) will look like this:
-  
-  ![image](https://user-images.githubusercontent.com/11583245/198911076-4e1c7450-6f2c-4626-b9e0-62fbdc27cc62.png)
