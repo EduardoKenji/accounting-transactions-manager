@@ -2,8 +2,7 @@
 
 Minimalist accounting software made in Ruby on Rails that exposes a GraphQL API 
 * Version details
-  - Ruby 3.1.2p20
-  - Ruby on Rails 7.0.4
+  - Ruby 3.1.2p20, Ruby on Rails 7.0.4, RSpec 3.12
   
 * Database details
   - PostgreSQL
